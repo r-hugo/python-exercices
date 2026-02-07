@@ -20,9 +20,14 @@ def sauvegarder(source):
         if os.path.isfile(chemin_source):
             shutil.copy2(chemin_source, chemin_destination)
             print(f"Fichier copié : {fichier}")
-        else:
-            print(f"Dossier ignoré : {fichier}")
+
+        elif os.path.isdir(chemin_source):
+            if not os.path.exists(chemin_destination):
+                shutil.copytree(chemin_source, chemin_destination)
+                print(f"Dossier copié : {fichier}")
+            else:
+                print(f"Dossier déjà existant: {fichier}")
 
 sauvegarder(source)
 
-#copie fichiers mais ignore dossiers
+#copie fichiers et dossiers
